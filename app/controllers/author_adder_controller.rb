@@ -4,6 +4,7 @@ class AuthorAdderController < ApplicationController
   before_filter :find_project, :find_project_author, :authorize
 
   def edit
+    @project_author.attributes = params[:project_author]
     @project_author.project = @project
     @project_author.save
   end
@@ -19,7 +20,4 @@ class AuthorAdderController < ApplicationController
     @project_author ||= ProjectAuthor.new()
   end
 
-  def find_user
-    @user = User.find params[:project_author][:user_id]
-  end
 end
