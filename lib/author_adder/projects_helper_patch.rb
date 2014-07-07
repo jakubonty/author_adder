@@ -23,6 +23,10 @@ module AuthorAdder
                                      :partial => 'projects/settings/edit_author',
                                      :label => :author_add })
             end
+
+            def available_author_users
+              User.status(User::STATUS_ACTIVE)
+            end
         end
     end
 end

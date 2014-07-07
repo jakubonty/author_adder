@@ -10,7 +10,8 @@ class ProjectAuthor < ActiveRecord::Base
 
   def check_if_user_exists
     begin
-      User.find self.user_id
+      user = User.find self.user_id
+      return false if user.status != User::STATUS_ACTIVE
     rescue
       return false
     end
