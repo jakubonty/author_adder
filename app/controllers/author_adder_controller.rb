@@ -1,10 +1,9 @@
 class AuthorAdderController < ApplicationController
   unloadable
 
-  before_filter :find_project, :find_project_author
+  before_filter :find_project, :find_project_author, :authorize
 
   def edit
-    binding.pry
     @project_author.project = @project
     @project_author.save
   end
