@@ -1,9 +1,29 @@
 Rails.configuration.to_prepare do
-  require_dependency 'author_adder/projects_helper_patch'
-  require_dependency 'author_adder/projects_controller_patch'
+  field_name = "Author"
 
-  # extending :edit_project permissions
-  Redmine::AccessControl.permission(:edit_project).actions.push "author_adder/edit"
+  custom_field = ProjectCustomField.find_by_name(field_name)
+
+  if custom_field.nil?
+    params = { name: field_name,
+               field_format: "user",
+               possible_values: nil,
+               regexp: "",
+               min_length: nil,
+               max_length: nil,
+               is_required: false,
+               is_for_all: false,
+               is_filter: false,
+               position: 1,
+               searchable: false,
+               default_value: nil,
+               editable: true,
+               visible: true,
+               multiple: false,
+               format_store: {:user_role=>[],:edit_tag_style=>""},
+               description: ""
+             }
+    custom_field = ProjectCustomField.create(params)
+  end
 end
 
 Redmine::Plugin.register :author_adder do
@@ -11,6 +31,6 @@ Redmine::Plugin.register :author_adder do
   author 'Jakub Motyčka'
   description 'This is a plugin for Redmine'
   version '0.0.1'
-  url 'http://example.com/path/to/plugin'
-  author_url 'http://example.com/about'
+  url 'https://github.com/jakubonty/author_adder/'
+  author_url 'https://github.com/jakubonty/'
 end
