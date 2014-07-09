@@ -3,3 +3,9 @@
 == Instalation
 
 * copy author_adder folder to plugins folder in redmine root
+
+* run rake redmine:plugins:migrate NAME=author_adder
+
+== Uninstalation
+
+* run rake redmine:plugins:migrate NAME=author_adder VERSION=0
