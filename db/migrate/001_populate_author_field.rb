@@ -1,12 +1,8 @@
-module AuthorAdder
+class PopulateAuthorField < ActiveRecord::Migration
+    FIELD_NAME = "Author"
 
-  def self.add_author_field
-    field_name = "Author"
-
-    custom_field = ProjectCustomField.find_by_name(field_name)
-
-    if custom_field.nil?
-      params = { name: field_name,
+    def self.up
+      params = { name: FIELD_NAME,
                  field_format: "user",
                  possible_values: nil,
                  regexp: "",
@@ -24,8 +20,10 @@ module AuthorAdder
                  format_store: {:user_role=>[],:edit_tag_style=>""},
                  description: ""
                }
-      custom_field = ProjectCustomField.create(params)
+        ProjectCustomField.create(params)
     end
-  end
-
+    def self.down
+      field = ProjectCustomField.find_by_name(FIELD_NAME)
+      field.delete if field
+    end
 end
