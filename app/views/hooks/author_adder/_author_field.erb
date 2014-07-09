@@ -1,0 +1,4 @@
+<div class="box tabular">
+<p><%= select_tag 'project[author_id]', options_from_collection_for_select(User.all, "id", "name", project.author_id) %>
+</p>
+</div>
