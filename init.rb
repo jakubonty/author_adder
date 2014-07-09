@@ -1,3 +1,9 @@
+require_dependency 'author_adder/hooks'
+
+Rails.configuration.to_prepare do
+  Project.send(:safe_attributes, 'author_id')
+end
+
 Redmine::Plugin.register :author_adder do
   name 'Author Adder plugin'
   author 'Jakub Motyčka'
