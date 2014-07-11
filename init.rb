@@ -1,7 +1,6 @@
-require_dependency 'author_adder/hooks'
-
 Rails.configuration.to_prepare do
-  Project.send(:safe_attributes, 'author_id')
+  require_dependency 'author_adder/hooks'
+  require_dependency 'author_adder/project_model_patch'
 end
 
 Redmine::Plugin.register :author_adder do
